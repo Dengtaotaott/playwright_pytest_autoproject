@@ -18,7 +18,7 @@ class TestIndex:
     def test_navigate_directly(self, page: Page):
         """测试直接使用navigate方法打开首页"""
         index_page = IndexPage(page)
-        
+        # 打开首页
         # 直接调用navigate，会自动使用IndexPage.URL（即Settings.BASE_URL）
         index_page.navigate()
         
