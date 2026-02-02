@@ -1,0 +1,21 @@
+# 测试数据文件
+
+# 登录测试数据
+test_successful_login:
+  username: "admin"
+  password: "admin123"
+
+test_login_with_invalid_credentials:
+  username: "invalid_user"
+  password: "invalid_pass"
+
+# 搜索测试数据
+test_search_functionality:
+  keyword: "自动化测试"
+
+# 其他测试数据
+test_user_registration:
+  username: "newuser"
+  email: "newuser@example.com"
+  password: "password123"
+
