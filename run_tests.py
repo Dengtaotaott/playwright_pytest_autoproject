@@ -62,9 +62,13 @@ def run_tests(marker=None, file=None, parallel=False, html_report=True):
     if html_report:
         cmd.extend(["--html=reports/report.html", "--self-contained-html"])
     
+    # 子进程不继承 PWDEBUG，避免通过 run_tests.py 运行时误开 Playwright Inspector
+    env = os.environ.copy()
+    env.pop("PWDEBUG", None)
+
     print(f"执行命令: {' '.join(cmd)}")
     print(f"工作目录: {project_root}")
-    result = subprocess.run(cmd, cwd=project_root)
+    result = subprocess.run(cmd, cwd=project_root, env=env)
     sys.exit(result.returncode)
 
 

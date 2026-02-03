@@ -16,7 +16,7 @@ class BrowserManager:
     def launch_browser(
         self,
         browser_type: str = "chromium",
-        headless: bool = True,
+        headless: bool = False,
         slow_mo: int = 0,
         timeout: int = 30000,
         **kwargs

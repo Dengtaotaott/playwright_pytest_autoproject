@@ -72,8 +72,8 @@ def browser(playwright, browser_type_launch_args, settings):
 
 
 @pytest.fixture(scope="function")
-def context(browser, settings):
-    """浏览器上下文 - 每个测试函数一个"""
+def context(browser, settings, request):
+    """浏览器上下文 - 每个测试函数一个。终端设置 TRACE=1 再运行 pytest 时会录制 Trace 到 test-results/。"""
     # 按参考示例使用 no_viewport=True 以占用最大可用尺寸
     context = browser.new_context(
         no_viewport=True,
@@ -86,7 +86,18 @@ def context(browser, settings):
     if settings.PERMISSIONS:
         context.grant_permissions(settings.PERMISSIONS)
     
+    # 仅当环境变量 TRACE=1（或 true/yes）时录制 Trace，便于终端调试
+    trace_on = os.environ.get("TRACE", "").strip().lower() in ("1", "true", "yes")
+    if trace_on:
+        context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    
     yield context
+    
+    if trace_on:
+        trace_dir = "test-results"
+        os.makedirs(trace_dir, exist_ok=True)
+        trace_path = os.path.join(trace_dir, f"trace-{request.node.name}.zip")
+        context.tracing.stop(path=trace_path)
     context.close()
 
 

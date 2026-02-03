@@ -37,7 +37,7 @@ class TestComplicatedPage:
         logger.info(f"点击按钮后URL: {current_url}")
         assert "complicated-page" in current_url.lower(), "点击后不应离开 complicated-page 页面"
 
-    @pytest.mark.skip(reason="跳过测试")
+    # @pytest.mark.skip(reason="跳过测试")
     def test_scroll_fill(self,page):
         """测试点击 'Big page with many elements' 链接（使用 Playwright 定位器）"""
         index_page = IndexPage(page)

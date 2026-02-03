@@ -16,12 +16,12 @@ class Settings:
     """项目配置类"""
     
     # 基础URL
-    # BASE_URL = os.getenv("BASE_URL", "https://ultimateqa.com/automation")
-    BASE_URL = os.getenv("BASE_URL", "http://xn--6frwj470ei1s2kl.com/demo")
+    BASE_URL = os.getenv("BASE_URL", "https://ultimateqa.com/automation")
+    # BASE_URL = os.getenv("BASE_URL", "http://xn--6frwj470ei1s2kl.com/demo")
     
     # 浏览器配置
     BROWSER = os.getenv("BROWSER", "chromium")  # chromium, firefox, webkit
-    HEADLESS = os.getenv("HEADLESS", "True").lower() == "true"
+    HEADLESS = os.getenv("HEADLESS", "False").lower() == "true"
     SLOW_MO = int(os.getenv("SLOW_MO", "0"))  # 操作延迟（毫秒）
     BROWSER_TIMEOUT = int(os.getenv("BROWSER_TIMEOUT", "20"))  # 浏览器超时（秒）
     

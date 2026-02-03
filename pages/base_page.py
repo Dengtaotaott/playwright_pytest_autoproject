@@ -149,8 +149,8 @@ class BasePage:
             url = self.URL if hasattr(self, "URL") else self.settings.BASE_URL
         
         logger.info(f"导航到: {url}")
-        self.page.goto(url, wait_until="networkidle")
-        self.wait_utils.wait_for_load_state("load")
+        # 使用 load 避免 networkidle 在资源多的页面等待过久（常超过 1 分钟）
+        self.page.goto(url, wait_until="load")
     
     def get_title(self) -> str:
         """获取页面标题"""
